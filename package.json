@@ -20,10 +20,10 @@
   "author": "Matias Cortes",
   "license": "ISC",
   "dependencies": {
-    "css": "^2.2.4",
     "xmldom": "^0.1.22"
   },
   "peerDependencies": {
+    "css": "^2.2.4",
     "react-native-svg": "^5.3.0"
   },
   "bugs": {
