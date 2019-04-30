@@ -277,16 +277,25 @@ class SvgUri extends Component{
     return this.createSVGElement(node, arrayElements);
   }
 
+  getCleanSVG() {
+    return this.state.svgXmlData.substring(
+      this.state.svgXmlData.indexOf("<svg "),
+      (this.state.svgXmlData.indexOf("</svg>") + 6)
+    )
+      .replace(/<!-(.*?)->/g, '')
+      // remove white space between xml tags
+      .replace(/>\s+</g, '><')
+      // make sure decimal numbers begin with 0
+      .replace(/offset="\./g, 'offset="0.');
+  }
+
   render () {
     try {
       if (this.state.svgXmlData == null) {
         return null;
       }
 
-      const inputSVG = this.state.svgXmlData.substring(
-        this.state.svgXmlData.indexOf("<svg "),
-        (this.state.svgXmlData.indexOf("</svg>") + 6)
-      ).replace(/<!-(.*?)->/g, '');
+      const inputSVG = this.getCleanSVG();
 
       const doc = new xmldom.DOMParser().parseFromString(inputSVG);
 
