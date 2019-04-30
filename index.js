@@ -3,6 +3,7 @@ import {View} from 'react-native';
 import PropTypes from 'prop-types'
 import xmldom from 'xmldom';
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
+import applyCSS from './css';
 
 import Svg,{
     Circle,
@@ -298,6 +299,7 @@ class SvgUri extends Component{
       const inputSVG = this.getCleanSVG();
 
       const doc = new xmldom.DOMParser().parseFromString(inputSVG);
+      applyCSS(doc);
 
       const rootSVG = this.inspectNode(doc.childNodes[0]);
 
